@@ -18,6 +18,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class Robot extends TimedRobot {
   public static DifferentialElevator elevator;
+  public static OI oi;
   private static final String kDefaultAuto = "Default";
   private static final String kCustomAuto = "My Auto";
   private String m_autoSelected;
@@ -27,8 +28,9 @@ public class Robot extends TimedRobot {
    * This function is run when the robot is first started up and should be used for any
    * initialization code.
    */
-  public void RobotInit() {
+  public void robotInit() {
     elevator = new DifferentialElevator(10, 11);
+    oi = new OI();
     m_chooser.setDefaultOption("Default Auto", kDefaultAuto);
     m_chooser.addOption("My Auto", kCustomAuto);
     SmartDashboard.putData("Auto choices", m_chooser);
@@ -47,6 +49,8 @@ public class Robot extends TimedRobot {
     SmartDashboard.putNumber("Desired Rotation", elevator.ROTATION_DESIRED);
     SmartDashboard.putNumber("Left Motor actual", elevator.getLeftMotor());
     SmartDashboard.putNumber("Right Motor actual", elevator.getRightMotor());
+    SmartDashboard.putBoolean("pressed", oi.contRaw[1]);
+    oi.run();
     
   }
 
@@ -87,7 +91,9 @@ public class Robot extends TimedRobot {
 
   /** This function is called periodically during operator control. */
   @Override
-  public void teleopPeriodic() {}
+  public void teleopPeriodic() {
+    elevator.run();
+  }
 
   /** This function is called once when the robot is disabled. */
   @Override

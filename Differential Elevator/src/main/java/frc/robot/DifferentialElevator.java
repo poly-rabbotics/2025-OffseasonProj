@@ -13,24 +13,24 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class DifferentialElevator {
     Joystick controller;
 
-    private static final double STEP_PER_DEGREE = 0.0;
-    private static final double STEP_PER_INCH = 0.0;
+    private static final double STEP_PER_DEGREE = 1.0;
+    private static final double STEP_PER_INCH = 1.0;
 
-    private static final double PID_P = 0.0;
+    private static final double PID_P = 0.1;
     private static final double PID_I = 0.0;
     private static final double PID_D = 0.0;
 
     private static double ELEVATOR_CURRENT;
     private static double ROTATION_CURRENT;
 
-    double ELEVATOR_DESIRED;
-    double ROTATION_DESIRED;
+    static double ELEVATOR_DESIRED = 0.0;
+    static double ROTATION_DESIRED = 0.0;
 
-    double ELEVATOR_LOWERED;
-    double ELEVATOR_RAISED;
+    double ELEVATOR_LOWERED = 0.0;
+    double ELEVATOR_RAISED = 100.0;
 
     double ROTATION_LOWERED;
-    double ROTATION_RAISED;
+    double ROTATION_RAISED = 50.0;
 
     double encoderLeft, encoderRight;
 

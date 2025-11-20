@@ -35,10 +35,14 @@ public class OI {
         }
         if(contRaw[1]){ //raise
             elevator.setHeight(elevator.ELEVATOR_RAISED);
-            
+        }
+        else if(contRaw[2]){
+            elevator.setHeight(elevator.ELEVATOR_RAISED);
+            elevator.setRotation(elevator.ROTATION_RAISED);
         }
         else{ //default
             elevator.setHeight(0);
+            elevator.setRotation(0);
         }
         }
     }
