@@ -4,9 +4,12 @@
 
 package frc.robot;
 
+import java.util.Dictionary;
+
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 
 /**
  * The methods in this class are called automatically corresponding to each mode, as described in
@@ -14,6 +17,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * this project, you must also update the Main.java file in the project.
  */
 public class Robot extends TimedRobot {
+  public static DifferentialElevator elevator;
   private static final String kDefaultAuto = "Default";
   private static final String kCustomAuto = "My Auto";
   private String m_autoSelected;
@@ -23,7 +27,8 @@ public class Robot extends TimedRobot {
    * This function is run when the robot is first started up and should be used for any
    * initialization code.
    */
-  public Robot() {
+  public void RobotInit() {
+    elevator = new DifferentialElevator(10, 11);
     m_chooser.setDefaultOption("Default Auto", kDefaultAuto);
     m_chooser.addOption("My Auto", kCustomAuto);
     SmartDashboard.putData("Auto choices", m_chooser);
@@ -37,7 +42,13 @@ public class Robot extends TimedRobot {
    * SmartDashboard integrated updating.
    */
   @Override
-  public void robotPeriodic() {}
+  public void robotPeriodic() {
+    SmartDashboard.putNumber("Desired Height", elevator.ELEVATOR_DESIRED);
+    SmartDashboard.putNumber("Desired Rotation", elevator.ROTATION_DESIRED);
+    SmartDashboard.putNumber("Left Motor actual", elevator.getLeftMotor());
+    SmartDashboard.putNumber("Right Motor actual", elevator.getRightMotor());
+    
+  }
 
   /**
    * This autonomous (along with the chooser code above) shows how to select between different
