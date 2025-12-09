@@ -34,15 +34,16 @@ public class OI {
         contRaw[i] = controller.getRawButton(i);
         }
         if(contRaw[1]){ //raise
-            elevator.setHeight(elevator.ELEVATOR_RAISED);
+            Pose.pose = "positionOne";
         }
-        else if(contRaw[2]){
-            elevator.setHeight(elevator.ELEVATOR_RAISED);
-            elevator.setRotation(elevator.ROTATION_RAISED);
+        if(contRaw[2]){
+            Pose.pose = "positionTwo";
+        }
+        if(contRaw[3]){
+            Pose.pose = "positionThree";
         }
         else{ //default
-            elevator.setHeight(0);
-            elevator.setRotation(0);
-        }
+            Pose.pose = "default";
         }
     }
+}
