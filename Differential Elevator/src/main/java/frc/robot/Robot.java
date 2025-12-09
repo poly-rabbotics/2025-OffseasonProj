@@ -45,11 +45,12 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotPeriodic() {
-    SmartDashboard.putNumber("Desired Height", elevator.ELEVATOR_DESIRED);
-    SmartDashboard.putNumber("Desired Rotation", elevator.ROTATION_DESIRED);
+    Pose.run();
+    SmartDashboard.putNumber("Desired Height", Pose.elevatorPos);
+    SmartDashboard.putNumber("Desired Rotation", Pose.pivotPos);
     SmartDashboard.putNumber("Left Motor actual", elevator.getLeftMotor());
     SmartDashboard.putNumber("Right Motor actual", elevator.getRightMotor());
-    SmartDashboard.putBoolean("pressed", oi.contRaw[1]);
+    SmartDashboard.putBoolean("Pressed", oi.contRaw[1]);
     oi.run();
     
   }

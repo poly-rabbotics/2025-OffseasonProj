@@ -23,9 +23,6 @@ public class DifferentialElevator {
     private static double ELEVATOR_CURRENT;
     private static double ROTATION_CURRENT;
 
-    static double ELEVATOR_DESIRED = 0.0;
-    static double ROTATION_DESIRED = 0.0;
-
     double ELEVATOR_LOWERED = 0.0;
     double ELEVATOR_RAISED = 100.0;
 
@@ -64,15 +61,6 @@ public class DifferentialElevator {
         rightConfig.Slot0.kD = PID_D;
         rightMotor.getConfigurator().apply(rightConfig);  
     }
-
-    public void setHeight(double desiredHeight){
-        ELEVATOR_DESIRED = desiredHeight;
-    }
-
-    public void setRotation(double desiredRotation){
-        ROTATION_DESIRED = desiredRotation;
-    }
-
     public int convertHeight(double desiredHeight){
         int steppedHeight = (int) (desiredHeight / STEP_PER_INCH);
         return steppedHeight;
@@ -89,7 +77,7 @@ public class DifferentialElevator {
         return rightMotor.getPosition().getValueAsDouble();
     }
     public void run(){
-        leftMotor.setControl(new PositionDutyCycle(convertRotation(ROTATION_DESIRED) - convertHeight(ELEVATOR_DESIRED)));
-        rightMotor.setControl(new PositionDutyCycle(convertRotation(ROTATION_DESIRED) + convertHeight(ELEVATOR_DESIRED)));
+        leftMotor.setControl(new PositionDutyCycle(convertRotation(Pose.pivotPos) - convertHeight(Pose.elevatorPos)));
+        rightMotor.setControl(new PositionDutyCycle(convertRotation(Pose.pivotPos) + convertHeight(Pose.defaultElevatorPos)));
     }
 }
